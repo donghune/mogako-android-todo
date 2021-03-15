@@ -1,5 +1,14 @@
 # 모각코 코딩 챌린지 [ Todo List ]
 
+master[main] 브랜치를 클론 하신뒤에 브랜치를 하나 따셔서 푸쉬해주시면 됩니다.
+
+브랜치 네이밍은 [githubname]/[branch-name] branch-name 은 선택사항입니다.
+- namu0240
+- namu0240/mvc
+- namu0240/mvp
+- namu0240/mvvm
+- namu0240/mvvm-clean
+
 ## 프로젝트 설명
 
 ## 🚀 개발 필수 요구사항 [ 다음과 같은 기능은 필수적으로 구현하여야 합니다 ]
