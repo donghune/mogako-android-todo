@@ -1,2 +1,3 @@
+include ':data:localdb'
 include ':app'
 rootProject.name = "todo"
