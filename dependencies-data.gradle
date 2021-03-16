@@ -1,0 +1,12 @@
+repositories {
+    jcenter()
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation rootProject.ext.dependencies.room
+    implementation rootProject.ext.dependencies.room_katp
+    implementation rootProject.ext.dependencies.room_ktx
+    implementation rootProject.ext.dependencies.room_text
+}
