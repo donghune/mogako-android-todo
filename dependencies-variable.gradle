@@ -2,7 +2,7 @@ ext {
     room_version = "2.2.6"
 }
 
-exp.dependencies = [
+ext.libraries = [
         room     : "androidx.room:room-runtime:$room_version",
         room_kapt: "androidx.room:room-compiler:$room_version",
         room_test: "androidx.room:room-testing:$room_version",
