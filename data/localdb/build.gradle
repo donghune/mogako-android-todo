@@ -45,7 +45,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     implementation libraries.room
-    kapt libraries.room_kapt
+    kapt libraries.room_compiler
     implementation libraries.room_ktx
     testImplementation libraries.room_test
 
