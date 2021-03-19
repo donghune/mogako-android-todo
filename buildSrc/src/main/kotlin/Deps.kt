@@ -33,6 +33,24 @@ fun DependencyHandlerScope.androidActivity(
     version: String = Ver.android_activity
 ) = androidx("activity", "activity-ktx", version)
 
+fun DependencyHandlerScope.androidFragment(
+    version: String = Ver.android_fragment
+) = androidx("fragment", "fragment-ktx", version)
+
+fun DependencyHandlerScope.lifecycle(
+    name: String,
+    version: String = Ver.android_lifecycle
+) = androidx("lifecycle", "lifecycle-$name", version)
+
+fun DependencyHandlerScope.javaxInject(
+    version: String = Ver.javax_inject
+) = "javax.inject:javax.inject:$version"
+
+fun DependencyHandlerScope.hilt(
+    name: String,
+    version: String = Ver.hilt
+) = "com.google.dagger:hilt-$name:$version"
+
 fun DependencyHandlerScope.junit(
     version: String = Ver.junit
 ) = "junit:junit:$version"

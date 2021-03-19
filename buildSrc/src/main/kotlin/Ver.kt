@@ -10,6 +10,7 @@ object Ver {
     const val min_sdk = 23
     const val target_sdk = 30
     const val jvm_target = "1.8"
+    const val javax_inject = "1"
 
     const val coroutines = "1.4.2"
 
@@ -18,10 +19,14 @@ object Ver {
     const val android_material = "1.3.0-alpha03"
     const val android_appcompat = "1.1.0"
     const val android_activity = "1.2.0-beta02"
+    const val android_fragment = "1.3.0-beta02"
+    const val android_lifecycle = "2.3.0-beta01"
 
     const val junit = "4.12"
     const val android_junit = "1.1.2"
     const val android_espresso = "3.3.0"
 
     const val studio = "4.1.2"
+
+    const val hilt = "2.33-beta"
 }

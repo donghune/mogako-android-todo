@@ -20,7 +20,7 @@ android {
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
-            proguardFiles (
+            proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
@@ -28,13 +28,13 @@ android {
     }
 
     sourceSets {
-        getByName("main") {
+        main {
             java.srcDir("src/main/kotlin")
         }
-        getByName("test") {
+        test {
             java.srcDir("src/test/kotlin")
         }
-        getByName("androidTest") {
+        androidTest {
             java.srcDir("src/androidTest/kotlin")
         }
     }
