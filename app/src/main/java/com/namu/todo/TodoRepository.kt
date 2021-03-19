@@ -1,10 +1,9 @@
 package com.namu.todo
 
 import androidx.annotation.WorkerThread
-import androidx.lifecycle.LiveData
 
 class TodoRepository(private val todoDao: TodoDao) {
-    val allTodo: LiveData<List<Todo>> = todoDao.getAll()
+    val allTodo: kotlinx.coroutines.flow.Flow<List<Todo>> = todoDao.getAll()
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
