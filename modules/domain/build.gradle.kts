@@ -21,6 +21,7 @@ android {
 
 dependencies {
     implementation(javaxInject())
+    implementation(project(":util"))
     api(room("runtime"))
     kapt(room("compiler"))
     api(room("ktx"))
