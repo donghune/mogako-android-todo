@@ -54,6 +54,8 @@ dependencies {
     implementation(androidAppcompat())
     implementation(androidMaterial())
     implementation(constraintLayout())
+    implementation(androidActivity())
+    implementation(androidFragment())
     implementation(coroutines("android"))
 
     testImplementation(junit())
