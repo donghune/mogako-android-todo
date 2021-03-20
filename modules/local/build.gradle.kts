@@ -10,6 +10,7 @@ android {
     defaultConfig {
         minSdkVersion(Ver.min_sdk)
         targetSdkVersion(Ver.target_sdk)
+        buildConfigField("String", "DB_NAME", "\"todo_database\"")
     }
 
     sourceSets {
@@ -21,6 +22,7 @@ android {
 
 dependencies {
     implementation(project(":data"))
+    implementation(project(":util"))
 
     implementation(hilt("android"))
     kapt(hilt("compiler"))

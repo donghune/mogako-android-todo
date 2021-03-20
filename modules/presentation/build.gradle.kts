@@ -1,6 +1,8 @@
 plugins {
     `android-application`
     `kotlin-android`
+    `kotlin-kapt`
+    `hilt-plugin`
 }
 
 android {
@@ -57,6 +59,9 @@ dependencies {
     implementation(androidActivity())
     implementation(androidFragment())
     implementation(coroutines("android"))
+
+    implementation(hilt("android"))
+    kapt(hilt("compiler"))
 
     testImplementation(junit())
     androidTestImplementation(androidJunit())

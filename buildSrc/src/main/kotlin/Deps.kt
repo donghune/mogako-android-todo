@@ -42,6 +42,11 @@ fun DependencyHandlerScope.lifecycle(
     version: String = Ver.android_lifecycle
 ) = androidx("lifecycle", "lifecycle-$name", version)
 
+fun DependencyHandlerScope.room(
+    name: String,
+    version: String = Ver.android_room
+) = androidx("room", "room-$name", version)
+
 fun DependencyHandlerScope.javaxInject(
     version: String = Ver.javax_inject
 ) = "javax.inject:javax.inject:$version"

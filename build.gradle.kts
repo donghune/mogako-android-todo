@@ -7,6 +7,7 @@ buildscript {
     dependencies {
         classpath(buildGradle())
         classpath(kotlin("gradle-plugin"))
+        classpath(hilt("android-gradle-plugin"))
     }
 }
 

@@ -21,6 +21,7 @@ android {
 
 dependencies {
     api(project(":domain"))
+    implementation(project(":util"))
     implementation(coroutines("android"))
 
     implementation(hilt("android"))

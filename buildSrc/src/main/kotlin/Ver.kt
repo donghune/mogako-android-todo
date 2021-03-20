@@ -21,6 +21,7 @@ object Ver {
     const val android_activity = "1.2.0-beta02"
     const val android_fragment = "1.3.0-beta02"
     const val android_lifecycle = "2.3.0-beta01"
+    const val android_room = "2.2.6"
 
     const val junit = "4.12"
     const val android_junit = "1.1.2"
