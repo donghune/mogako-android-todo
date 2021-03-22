@@ -1,3 +1,5 @@
+include ':feature:addedit'
+include ':feature:todolist'
 include ':domain:todo'
 include ':data:localdb'
 include ':app'
