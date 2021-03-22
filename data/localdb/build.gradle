@@ -44,6 +44,9 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
+    implementation libraries.dagger
+    kapt libraries.dagger_kapt
+
     implementation libraries.room
     kapt libraries.room_compiler
     implementation libraries.room_ktx

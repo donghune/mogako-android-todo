@@ -1,10 +1,13 @@
 ext {
     room_version = "2.2.6"
+    dagger_version = "2.33"
 }
 
 ext.libraries = [
         room         : "androidx.room:room-runtime:$room_version",
         room_compiler: "androidx.room:room-compiler:$room_version",
         room_test    : "androidx.room:room-testing:$room_version",
-        room_ktx     : "androidx.room:room-ktx:$room_version"
+        room_ktx     : "androidx.room:room-ktx:$room_version",
+        dagger       : "com.google.dagger:dagger:$dagger_version",
+        dagger_kapt  : "com.google.dagger:dagger-compiler:$dagger_version"
 ]
