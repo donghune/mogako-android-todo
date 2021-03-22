@@ -6,4 +6,61 @@
     android:layout_height="match_parent"
     tools:context="com.todo.addedit.AddEditActivity">
 
+    <TextView
+        android:id="@+id/text_todo_title"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:gravity="center"
+        android:text="New Task"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/button_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_baseline_close_24"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="10dp"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageButton
+        android:id="@+id/button_calendar"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:background="@drawable/ic_baseline_calendar_today_24"
+        android:layout_margin="10dp"
+        app:layout_constraintBottom_toTopOf="@id/button_add"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <ToggleButton
+        android:id="@+id/toggle_notification"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:background="@drawable/reminder_toggle_style"
+        android:layout_margin="10dp"
+        android:textOn=""
+        android:textOff=""
+        app:layout_constraintBottom_toTopOf="@id/button_add"
+        app:layout_constraintStart_toEndOf="@id/button_calendar"/>
+
+    <EditText
+        android:id="@+id/edit_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/text_todo_title" />
+
+    <Button
+        android:id="@+id/button_add"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@android:color/holo_green_light"
+        android:text="+"
+        android:textColor="@android:color/white"
+        android:textSize="35sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
