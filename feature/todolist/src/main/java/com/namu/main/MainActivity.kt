@@ -2,7 +2,6 @@ package com.namu.main
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.namu.common.entity.Todo
@@ -11,45 +10,51 @@ import com.namu.main.databinding.ActivityMainBinding
 import org.koin.java.KoinJavaComponent.inject
 import java.util.*
 import kotlin.random.Random
-import androidx.lifecycle.Observer
+import com.namu.common.util.BaseActivity
 
-class MainActivity : AppCompatActivity(R.layout.activity_main) {
+class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
-    private lateinit var binding: ActivityMainBinding
-    private lateinit var adapter: TodoAdapter
-    private val viewModel: MainViewModel by inject(MainViewModel::class.java)
+    override val viewModel: MainViewModel by inject(MainViewModel::class.java)
+    private lateinit var todoAdapter: TodoAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
 
-        adapter = TodoAdapter()
-        adapter.setOnClickListener {
-            it.isComplete = !it.isComplete
-            viewModel.completeTodo(it)
-            viewModel.updateTodoList()
+        todoAdapter = TodoAdapter().apply {
+            setOnClickListener {
+                it.isComplete = !it.isComplete
+                viewModel.completeTodo(it)
+                viewModel.updateTodoList()
+            }
         }
 
-        binding.recyclerTodoList.adapter = adapter
-        binding.recyclerTodoList.layoutManager = LinearLayoutManager(this)
-        binding.recyclerTodoList.setHasFixedSize(false)
+        binding {
+            recyclerTodoList.apply {
+                adapter = todoAdapter
+                layoutManager = LinearLayoutManager(this@MainActivity)
+                setHasFixedSize(false)
+            }
 
-        binding.buttonTodoCreate.setOnClickListener {
-            viewModel.addTodo(
-                Todo(
-                    0,
-                    "content${"%04d".format(Random.nextInt(1000))}",
-                    Calendar.getInstance().time,
-                    false,
-                    isComplete = false
+            buttonTodoCreate.setOnClickListener {
+                viewModel.addTodo(
+                    Todo(
+                        id = 0,
+                        content = "content${"%04d".format(Random.nextInt(1000))}",
+                        date = Calendar.getInstance().time,
+                        isUseReminder = false,
+                        isComplete = false
+                    )
                 )
-            )
+                viewModel.updateTodoList()
+            }
         }
 
-        viewModel.todoList.observe(this, Observer { todoList: List<Todo> ->
-            adapter.submitList(todoList)
-            viewModel.updateTodoList()
+        viewModel.todoList.observe(this, { todoList: List<Todo> ->
+            todoAdapter.submitList(todoList)
         })
+
+        viewModel.updateTodoList()
 
         setContentView(binding.root)
     }

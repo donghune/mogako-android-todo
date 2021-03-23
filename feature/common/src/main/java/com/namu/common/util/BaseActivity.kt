@@ -1,14 +1,16 @@
 package com.namu.common.util
 
-import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModel
 import androidx.viewbinding.ViewBinding
 
-abstract class BaseActivity<B : ViewBinding, VM : BaseViewModel> : AppCompatActivity() {
+abstract class BaseActivity<VB : ViewBinding, VM : ViewModel> : AppCompatActivity() {
 
-    private lateinit var binding: B
+    protected lateinit var binding: VB
+    protected abstract val viewModel: VM
 
-    @LayoutRes
-    protected abstract fun layoutResId(): Int?
+    fun binding(block : VB.() -> Unit) {
+        block.invoke(binding)
+    }
 
 }
