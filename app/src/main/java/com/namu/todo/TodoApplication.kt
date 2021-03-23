@@ -8,6 +8,6 @@ class TodoApplication: Application() {
 
     val applicationScope = CoroutineScope(SupervisorJob())
 
-    val database by lazy { TodoRoomDatabase.getDatabase(this) }
+    val database by lazy { TodoRoomDatabase.getDatabase(this, applicationScope) }
     val repository by lazy { TodoRepository(database.todoDao()) }
 }
