@@ -11,6 +11,7 @@ import org.koin.java.KoinJavaComponent.inject
 import java.util.*
 import kotlin.random.Random
 import com.namu.common.util.BaseActivity
+import com.todo.addedit.AddEditActivity
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
@@ -37,15 +38,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             }
 
             buttonTodoCreate.setOnClickListener {
-                viewModel.addTodo(
-                    Todo(
-                        id = 0,
-                        content = "content${"%04d".format(Random.nextInt(1000))}",
-                        date = Calendar.getInstance().time,
-                        isUseReminder = false,
-                        isComplete = false
-                    )
-                )
+                AddEditActivity.startActivity(this@MainActivity)
                 viewModel.updateTodoList()
             }
         }
@@ -61,10 +54,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     companion object {
         private val TAG = MainActivity::class.simpleName
-
-        fun startActivity(context: Context) {
-            context.startActivity(Intent(context, MainActivity::class.java))
-        }
     }
 
 }

@@ -24,8 +24,4 @@ class MainViewModel(
         todoRepository.update(todo.toTodoEntity())
     }
 
-    fun addTodo(todo: Todo) {
-        todoRepository.insert(todo.toTodoEntity())
-    }
-
 }

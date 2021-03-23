@@ -33,7 +33,7 @@ class TodoViewHolder(
                 if (dayDiff < 0) {
                     "overdue"
                 } else {
-                    SimpleDateFormat("yyyy-MM-dd", Locale.KOREA).format(todoDate)
+                    SimpleDateFormat("yyyy-MM-dd", Locale.KOREA).format(todoDate.time)
                 }
             }
         }

@@ -49,6 +49,7 @@ dependencies {
     implementation libraries.koin
     testImplementation libraries.koin_test
 
+    implementation project(":feature:addedit")
     implementation project(":domain:todo")
     implementation project(":feature:common")
 }
