@@ -6,11 +6,10 @@ import com.todo.addedit.databinding.ActivityAddEditBinding
 import org.koin.core.parameter.parametersOf
 import org.koin.java.KoinJavaComponent.inject
 
-class AddEditActivity : AppCompatActivity(R.layout.activity_add_edit),
-    com.todo.addedit.AddEditContract.View {
+class AddEditActivity : AppCompatActivity(R.layout.activity_add_edit) {
 
     private lateinit var binding: ActivityAddEditBinding
-    val presenter: AddEditPresenter by inject(AddEditPresenter::class.java) { parametersOf(this@AddEditActivity) }
+    private val viewModel by inject(AddEditViewModel::class.java)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

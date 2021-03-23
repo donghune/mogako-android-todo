@@ -7,5 +7,5 @@ data class Todo(
     val content: String,
     val date: Date,
     val isUseReminder: Boolean,
-    val isComplete: Boolean
+    var isComplete: Boolean
 )

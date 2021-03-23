@@ -8,16 +8,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.namu.common.entity.Todo
 import com.namu.main.adapter.TodoAdapter
 import com.namu.main.databinding.ActivityMainBinding
-import org.koin.core.parameter.parametersOf
 import org.koin.java.KoinJavaComponent.inject
 import java.util.*
 import kotlin.random.Random
+import androidx.lifecycle.Observer
 
-class MainActivity : AppCompatActivity(R.layout.activity_main), MainContract.View {
+class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: TodoAdapter
-    private val presenter: MainPresenter by inject(MainPresenter::class.java) { parametersOf(this@MainActivity) }
+    private val viewModel: MainViewModel by inject(MainViewModel::class.java)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +25,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), MainContract.Vie
 
         adapter = TodoAdapter()
         adapter.setOnClickListener {
-
+            it.isComplete = !it.isComplete
+            viewModel.completeTodo(it)
+            viewModel.updateTodoList()
         }
 
         binding.recyclerTodoList.adapter = adapter
@@ -33,27 +35,23 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), MainContract.Vie
         binding.recyclerTodoList.setHasFixedSize(false)
 
         binding.buttonTodoCreate.setOnClickListener {
-            presenter.run {
-                addTodo(
-                        Todo(
-                            0,
-                            "content${"%04d".format(Random.nextInt(1000))}",
-                            Calendar.getInstance().time,
-                            false,
-                            isComplete = false
-                        )
-                    )
-                updateTodoList()
-            }
+            viewModel.addTodo(
+                Todo(
+                    0,
+                    "content${"%04d".format(Random.nextInt(1000))}",
+                    Calendar.getInstance().time,
+                    false,
+                    isComplete = false
+                )
+            )
         }
 
-        presenter.updateTodoList()
+        viewModel.todoList.observe(this, Observer { todoList: List<Todo> ->
+            adapter.submitList(todoList)
+            viewModel.updateTodoList()
+        })
 
         setContentView(binding.root)
-    }
-
-    override fun updateTodoList(todoList: List<Todo>) {
-        adapter.submitList(todoList)
     }
 
     companion object {
