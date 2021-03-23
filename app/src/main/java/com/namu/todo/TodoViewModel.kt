@@ -5,8 +5,8 @@ import kotlinx.coroutines.launch
 
 class TodoViewModel(private val repository: TodoRepository): ViewModel() {
 
-    val allWords: LiveData<List<Todo>> = repository.allTodo.asLiveData()
-    val adapter: TodoListAdapter? = allWords.value?.let { TodoListAdapter() }
+    val items: LiveData<List<Todo>> = repository.allTodo.asLiveData()
+    val adapter: TodoAdapter = TodoAdapter()
 
     fun insert(todo: Todo) = viewModelScope.launch {
         repository.insert(todo)
