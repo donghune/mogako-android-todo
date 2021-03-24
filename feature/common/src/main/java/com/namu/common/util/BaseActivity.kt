@@ -1,16 +1,22 @@
 package com.namu.common.util
 
+import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
-import androidx.viewbinding.ViewBinding
 
-abstract class BaseActivity<VB : ViewBinding, VM : ViewModel> : AppCompatActivity() {
+abstract class BaseActivity<T : ViewDataBinding, VM : ViewModel> : AppCompatActivity() {
 
-    protected lateinit var binding: VB
+    protected abstract val layoutRedId: Int
+    lateinit var binding: T
     protected abstract val viewModel: VM
 
-    fun binding(block : VB.() -> Unit) {
-        block.invoke(binding)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        binding = DataBindingUtil.setContentView(this, layoutRedId)
+        binding.lifecycleOwner = this@BaseActivity
     }
 
 }

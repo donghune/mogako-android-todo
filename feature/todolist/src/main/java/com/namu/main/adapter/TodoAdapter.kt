@@ -10,6 +10,7 @@ import com.namu.main.databinding.ItemTodoBinding
 class TodoAdapter : ListAdapter<Todo, TodoViewHolder>(DIFF_CALLBACK) {
 
     private var onClickListener: (Todo) -> Unit = {}
+    private var onCheckBoxClickListener: (Todo) -> Unit = {}
 
     companion object {
         val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Todo>() {
@@ -27,6 +28,10 @@ class TodoAdapter : ListAdapter<Todo, TodoViewHolder>(DIFF_CALLBACK) {
         onClickListener = block
     }
 
+    fun setOnCheckBoxClickListener(block: (Todo) -> Unit) {
+        onCheckBoxClickListener = block
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         return TodoViewHolder(
             ItemTodoBinding.inflate(
@@ -37,6 +42,9 @@ class TodoAdapter : ListAdapter<Todo, TodoViewHolder>(DIFF_CALLBACK) {
         ).apply {
             setOnClickListener {
                 onClickListener.invoke(it)
+            }
+            setOnCheckBoxClickListener {
+                onCheckBoxClickListener.invoke(it)
             }
         }
     }

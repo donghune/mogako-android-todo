@@ -1,46 +1,46 @@
 package com.namu.main
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.namu.common.entity.Todo
+import com.namu.common.util.BaseActivity
 import com.namu.main.adapter.TodoAdapter
 import com.namu.main.databinding.ActivityMainBinding
+import com.todo.addedit.AddEditActivity
 import org.koin.java.KoinJavaComponent.inject
 import java.util.*
-import kotlin.random.Random
-import com.namu.common.util.BaseActivity
-import com.todo.addedit.AddEditActivity
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
+    override val layoutRedId: Int = R.layout.activity_main
     override val viewModel: MainViewModel by inject(MainViewModel::class.java)
     private lateinit var todoAdapter: TodoAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+
+        binding.vm = viewModel
 
         todoAdapter = TodoAdapter().apply {
             setOnClickListener {
-                it.isComplete = !it.isComplete
+                AddEditActivity.startActivity(this@MainActivity, it)
+            }
+            setOnCheckBoxClickListener {
+                it.isComplete = true
                 viewModel.completeTodo(it)
                 viewModel.updateTodoList()
             }
         }
 
-        binding {
-            recyclerTodoList.apply {
-                adapter = todoAdapter
-                layoutManager = LinearLayoutManager(this@MainActivity)
-                setHasFixedSize(false)
-            }
+        binding.recyclerTodoList.apply {
+            adapter = todoAdapter
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            setHasFixedSize(false)
+        }
 
-            buttonTodoCreate.setOnClickListener {
-                AddEditActivity.startActivity(this@MainActivity)
-                viewModel.updateTodoList()
-            }
+        binding.buttonTodoCreate.setOnClickListener {
+            AddEditActivity.startActivity(this@MainActivity)
+            viewModel.updateTodoList()
         }
 
         viewModel.todoList.observe(this, { todoList: List<Todo> ->

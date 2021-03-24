@@ -14,9 +14,15 @@ class TodoViewHolder(
     private val isComplete = itemView.checkboxIsComplete
     private val content = itemView.textContent
     private val leftDate = itemView.textLeftDate
+    private var onCheckBoxClickListener: (Todo) -> Unit = {}
+
+    fun setOnCheckBoxClickListener(block: (todo: Todo) -> Unit) {
+        onCheckBoxClickListener = block
+    }
 
     fun bind(todo: Todo) {
         isComplete.isChecked = todo.isComplete
+        isComplete.setOnClickListener { onCheckBoxClickListener.invoke(todo) }
         content.text = todo.content
         leftDate.text = calculateLeftDate(todo)
     }
