@@ -59,7 +59,7 @@
             android:background="@drawable/reminder_toggle_style"
             android:textOff=""
             android:textOn=""
-            android:clickable="@{vm.todo.useReminder}"
+            android:clickable="@{vm.isUseReminder}"
             app:layout_constraintBottom_toTopOf="@id/button_add"
             app:layout_constraintStart_toEndOf="@id/button_calendar" />
 
@@ -68,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="@{vm.todo.content}"
+            android:text="@{vm.content}"
             app:layout_constraintTop_toBottomOf="@id/view_divider" />
 
         <ImageButton

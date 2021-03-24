@@ -18,7 +18,9 @@
             android:id="@+id/recycler_todo_list"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
-            tools:listitem="@layout/item_todo" />
+            tools:listitem="@layout/item_todo"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            bind:item="@{vm.todoList}"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/button_todo_create"

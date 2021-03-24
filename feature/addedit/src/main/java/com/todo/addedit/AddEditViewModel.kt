@@ -13,22 +13,42 @@ class AddEditViewModel(
     private val todoRepository: TodoRepository
 ) : BaseViewModel() {
 
-    private val _todo = MutableLiveData<Todo>()
-    val todo: LiveData<Todo>
-        get() = _todo
+    private val _id = MutableLiveData<Int>()
 
-    fun setBeforeTodo(beforeTodo: Todo?) {
-        _todo.value = beforeTodo
+    private val _content = MutableLiveData<String>()
+    val content: LiveData<String> = _content
+
+    private val _date = MutableLiveData<Date>()
+    val date: LiveData<Date> = _date
+
+    private val _isUseReminder = MutableLiveData<Boolean>()
+    val isUseReminder: LiveData<Boolean> = _isUseReminder
+
+    fun setContent(value : String) {
+        _content.value = value
+    }
+    fun setDate(value : Date) {
+        _date.value = value
+    }
+    fun setIsUseReminder(value : Boolean) {
+        _isUseReminder.value = value
+    }
+
+    fun setBeforeTodo(beforeTodo: Todo) {
+        _id.value = beforeTodo.id
+        _content.value = beforeTodo.content
+        _date.value = beforeTodo.date
+        _isUseReminder.value = beforeTodo.isUseReminder
     }
 
     fun clickAddEditButton(isNew: Boolean) {
-        val todoEntity : TodoEntity = (_todo.value ?: Todo(
-            id = 0,
-            content = "",
-            date = Date(),
-            isUseReminder = false,
+        val todoEntity: TodoEntity = Todo(
+            id = _id.value ?: 0,
+            content = _content.value ?: "",
+            date = _date.value ?: Date(),
+            isUseReminder = _isUseReminder.value ?: false,
             isComplete = false
-        )).toTodoEntity()
+        ).toTodoEntity()
 
         if (isNew) {
             todoRepository.insert(todoEntity)

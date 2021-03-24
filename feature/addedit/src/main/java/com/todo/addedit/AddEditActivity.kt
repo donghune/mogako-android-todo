@@ -22,7 +22,7 @@ class AddEditActivity : BaseActivity<ActivityAddEditBinding, AddEditViewModel>()
         val beforeTodo: Todo? = intent.getParcelableExtra("todo")
 
         binding.vm = viewModel
-        viewModel.setBeforeTodo(beforeTodo)
+        beforeTodo?.let { viewModel.setBeforeTodo(it) }
 
         binding.buttonAdd.setOnClickListener {
             viewModel.clickAddEditButton(beforeTodo == null)
@@ -32,8 +32,8 @@ class AddEditActivity : BaseActivity<ActivityAddEditBinding, AddEditViewModel>()
         binding.buttonCalendar.setOnClickListener {
             SingleDateAndTimePickerDialog.Builder(this@AddEditActivity)
                 .title("Simple")
-                .defaultDate(viewModel.todo.value?.date ?: Date())
-                .listener { viewModel.todo.value!!.date = it }
+                .defaultDate(viewModel.date.value ?: Date())
+                .listener { it }
                 .display()
         }
 

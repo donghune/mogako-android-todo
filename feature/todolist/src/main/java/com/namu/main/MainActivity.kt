@@ -1,6 +1,7 @@
 package com.namu.main
 
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.namu.common.entity.Todo
 import com.namu.common.util.BaseActivity
@@ -8,7 +9,6 @@ import com.namu.main.adapter.TodoAdapter
 import com.namu.main.databinding.ActivityMainBinding
 import com.todo.addedit.AddEditActivity
 import org.koin.java.KoinJavaComponent.inject
-import java.util.*
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
@@ -43,7 +43,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             viewModel.updateTodoList()
         }
 
-        viewModel.todoList.observe(this, { todoList: List<Todo> ->
+        viewModel.todoList.observe(this, Observer { todoList: List<Todo> ->
             todoAdapter.submitList(todoList)
         })
 

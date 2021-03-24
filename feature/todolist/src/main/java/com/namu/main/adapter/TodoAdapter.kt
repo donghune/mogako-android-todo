@@ -2,10 +2,14 @@ package com.namu.main.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.BindingAdapter
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.namu.common.entity.Todo
 import com.namu.main.databinding.ItemTodoBinding
+
 
 class TodoAdapter : ListAdapter<Todo, TodoViewHolder>(DIFF_CALLBACK) {
 
@@ -21,6 +25,13 @@ class TodoAdapter : ListAdapter<Todo, TodoViewHolder>(DIFF_CALLBACK) {
             override fun areContentsTheSame(oldItem: Todo, newItem: Todo): Boolean {
                 return oldItem.isComplete == newItem.isComplete
             }
+        }
+
+        @JvmStatic
+        @BindingAdapter("bind:item")
+        fun bindItem(recyclerView: RecyclerView, todoList: LiveData<List<Todo>>?) {
+            val adapter: TodoAdapter? = recyclerView.adapter as TodoAdapter?
+            adapter?.submitList(todoList?.value ?: listOf())
         }
     }
 
