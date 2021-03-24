@@ -1,11 +1,23 @@
 package com.namu.todo
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.namu.todo.databinding.ActivityMainBinding
+import android.view.View
+import androidx.activity.viewModels
+import com.namu.todo.databinding.ActivityAddTodoBinding
 
-class AddTodoActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_add_todo) {
+class AddTodoActivity : BaseActivity<ActivityAddTodoBinding>(R.layout.activity_add_todo) {
+
+    private val addTodoViewModel: AddTodoViewModel by viewModels {
+        AddTodoViewModelFactory((application as TodoApplication).repository)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+    }
+
+    fun addTodo(view: View) {
+        val todo = binding.etTodo.text.toString()
+        addTodoViewModel.insert(Todo(0, todo))
     }
 }
