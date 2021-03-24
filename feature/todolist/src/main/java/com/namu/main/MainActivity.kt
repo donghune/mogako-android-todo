@@ -52,6 +52,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         setContentView(binding.root)
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.updateTodoList()
+    }
+
     companion object {
         private val TAG = MainActivity::class.simpleName
     }
