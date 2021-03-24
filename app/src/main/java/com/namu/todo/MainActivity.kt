@@ -3,6 +3,7 @@ package com.namu.todo
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
@@ -17,13 +18,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        todoViewModel.items.observe(this, Observer { todo ->
-            todo?.let { todoViewModel.adapter.addData(it) }
-        })
         binding.apply {
             viewModel = todoViewModel
             rvTodo.adapter = todoViewModel.adapter
         }
+
+        todoViewModel.items.observe(this, Observer { todo ->
+            todo?.let { todoViewModel.adapter.addData(it) }
+        })
     }
 
     fun addTodo(view: View) {
