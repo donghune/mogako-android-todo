@@ -1,8 +1,10 @@
 package com.namu.todo
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
+import androidx.lifecycle.asLiveData
 import com.namu.todo.databinding.ActivityAddTodoBinding
 
 class AddTodoActivity : BaseActivity<ActivityAddTodoBinding>(R.layout.activity_add_todo) {
@@ -19,5 +21,6 @@ class AddTodoActivity : BaseActivity<ActivityAddTodoBinding>(R.layout.activity_a
     fun addTodo(view: View) {
         val todo = binding.etTodo.text.toString()
         addTodoViewModel.insert(Todo(0, todo))
+        finish()
     }
 }
