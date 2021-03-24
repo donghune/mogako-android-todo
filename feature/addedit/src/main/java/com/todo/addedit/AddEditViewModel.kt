@@ -1,5 +1,6 @@
 package com.todo.addedit
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.namu.common.util.BaseViewModel
 import com.namu.todo.TodoRepository
@@ -10,12 +11,17 @@ class AddEditViewModel(
     private val todoRepository: TodoRepository
 ) : BaseViewModel() {
 
+    companion object {
+        private const val TAG = "AddEditViewModel"
+    }
+
     private val _content = MutableLiveData<String>()
     private val _date = MutableLiveData<Date>()
     private val _isUseReminder = MutableLiveData<Boolean>()
 
     fun updateContent(content: String) {
-        _content.value = content
+        Log.d(TAG, "updateContent() called with: content = $content")
+        _content.postValue(content)
     }
 
     fun updateDate(date: Date) {

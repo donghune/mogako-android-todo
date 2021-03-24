@@ -1,22 +1,22 @@
 package com.todo.addedit
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.core.widget.addTextChangedListener
 import androidx.core.widget.doAfterTextChanged
-import com.github.florent37.singledateandtimepicker.SingleDateAndTimePicker
 import com.github.florent37.singledateandtimepicker.dialog.SingleDateAndTimePickerDialog
 import com.namu.common.util.BaseActivity
 import com.todo.addedit.databinding.ActivityAddEditBinding
 import org.koin.java.KoinJavaComponent.inject
 import java.util.*
 
-
 class AddEditActivity : BaseActivity<ActivityAddEditBinding, AddEditViewModel>() {
 
     companion object {
-        fun startActivity(context: Context) {
+        private const val TAG = "AddEditActivity"
+
+        fun startActivity(context: Activity) {
             context.startActivity(Intent(context, AddEditActivity::class.java))
         }
     }
@@ -31,7 +31,7 @@ class AddEditActivity : BaseActivity<ActivityAddEditBinding, AddEditViewModel>()
             toggleIsUseReminder.setOnCheckedChangeListener { _, isChecked ->
                 viewModel.updateIsUseReminder(isChecked)
             }
-            textContent.doAfterTextChanged {
+            editContent.doAfterTextChanged {
                 viewModel.updateContent(it.toString())
             }
             buttonAdd.setOnClickListener {
