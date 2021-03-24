@@ -5,12 +5,9 @@ import kotlinx.coroutines.launch
 
 class TodoViewModel(private val repository: TodoRepository): ViewModel() {
 
-    val items: LiveData<List<Todo>> = repository.allTodo.asLiveData()
+    val items = repository.allTodo.asLiveData()
     val adapter: TodoAdapter = TodoAdapter()
 
-    fun insert(todo: Todo) = viewModelScope.launch {
-        repository.insert(todo)
-    }
 }
 
 class TodoViewModelFactory(private val repository: TodoRepository) : ViewModelProvider.Factory {

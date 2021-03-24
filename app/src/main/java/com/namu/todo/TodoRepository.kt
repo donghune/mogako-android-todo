@@ -1,12 +1,12 @@
 package com.namu.todo
 
 import androidx.annotation.WorkerThread
+import kotlinx.coroutines.flow.Flow
 
 class TodoRepository(private val todoDao: TodoDao) {
-    val allTodo: kotlinx.coroutines.flow.Flow<List<Todo>> = todoDao.getAll()
+    val allTodo: Flow<List<Todo>>
+        get() = todoDao.getAll()
 
-    @Suppress("RedundantSuspendModifier")
-    @WorkerThread
     suspend fun insert(todo: Todo) {
         todoDao.insert(todo)
     }
