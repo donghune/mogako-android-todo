@@ -18,7 +18,7 @@ class MainViewModel(
     val todoList: LiveData<List<Todo>> = _todoList
 
     fun updateTodoList() {
-        _todoList.postValue(todoRepository.getAll().map { it.toTodo() })
+        _todoList.postValue(todoRepository.getAll().filterNot { it.isComplete }.map { it.toTodo() })
     }
 
     fun completeTodo(todo: Todo) {
