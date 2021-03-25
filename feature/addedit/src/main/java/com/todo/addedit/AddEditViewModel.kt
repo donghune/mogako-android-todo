@@ -15,45 +15,55 @@ class AddEditViewModel(
 
     private val _id = MutableLiveData<Int>()
 
-    private val _content = MutableLiveData<String>()
-    val content: LiveData<String> = _content
+    val content = MutableLiveData<String>()
 
-    private val _date = MutableLiveData<Date>()
-    val date: LiveData<Date> = _date
+    val date = MutableLiveData<Date>()
 
-    private val _isUseReminder = MutableLiveData<Boolean>()
-    val isUseReminder: LiveData<Boolean> = _isUseReminder
+    val isUseReminder = MutableLiveData<Boolean>()
 
-    fun setContent(value : String) {
-        _content.value = value
-    }
-    fun setDate(value : Date) {
-        _date.value = value
-    }
-    fun setIsUseReminder(value : Boolean) {
-        _isUseReminder.value = value
-    }
+    private var isNewTodo: Boolean = true
 
-    fun setBeforeTodo(beforeTodo: Todo) {
+    fun onTodoLoaded(beforeTodo: Todo) {
         _id.value = beforeTodo.id
-        _content.value = beforeTodo.content
-        _date.value = beforeTodo.date
-        _isUseReminder.value = beforeTodo.isUseReminder
+        content.value = beforeTodo.content
+        date.value = beforeTodo.date
+        isUseReminder.value = beforeTodo.isUseReminder
+        isNewTodo = false
     }
 
-    fun clickAddEditButton(isNew: Boolean) {
-        val todoEntity: TodoEntity = Todo(
-            id = _id.value ?: 0,
-            content = _content.value ?: "",
-            date = _date.value ?: Date(),
-            isUseReminder = _isUseReminder.value ?: false,
-            isComplete = false
-        ).toTodoEntity()
+    private fun createTodo(todo: Todo) {
+        todoRepository.insert(todo.toTodoEntity())
+        updateState(AddEditViewState.SaveSuccess)
+    }
 
-        if (isNew) {
-            todoRepository.insert(todoEntity)
+    private fun updateTodo(todo: Todo) {
+        todoRepository.update(todo.toTodoEntity())
+        updateState(AddEditViewState.SaveSuccess)
+    }
+
+    fun saveTodo() {
+        val currentId = _id.value ?: 0
+        val currentContent = content.value
+        val currentDate = date.value ?: Date()
+        val currentIsUseReminder = isUseReminder.value ?: false
+
+        if (currentContent.isNullOrEmpty()) {
+            updateState(AddEditViewState.SaveError("내용을 입력해주세요."))
+            return
+        }
+
+        val todo = Todo(
+            currentId,
+            currentContent,
+            currentDate,
+            currentIsUseReminder,
+            false
+        )
+
+        if (isNewTodo) {
+            createTodo(todo)
         } else {
-            todoRepository.update(todoEntity)
+            updateTodo(todo)
         }
     }
 

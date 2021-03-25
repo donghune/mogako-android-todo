@@ -22,11 +22,10 @@ class AddEditActivity : BaseActivity<ActivityAddEditBinding, AddEditViewModel>()
         val beforeTodo: Todo? = intent.getParcelableExtra("todo")
 
         binding.vm = viewModel
-        beforeTodo?.let { viewModel.setBeforeTodo(it) }
+        beforeTodo?.let { viewModel.onTodoLoaded(it) }
 
         binding.buttonAdd.setOnClickListener {
-            viewModel.clickAddEditButton(beforeTodo == null)
-            finish()
+            viewModel.saveTodo()
         }
 
         binding.buttonCalendar.setOnClickListener {
