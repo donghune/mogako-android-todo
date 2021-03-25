@@ -46,9 +46,13 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-    implementation 'com.github.florent37:singledateandtimepicker:2.2.7'
-
     implementation libraries.koin
+    implementation libraries.datetimepicker
+    implementation libraries.lifecycle_viewmodel_ktx
+    implementation libraries.lifecycle_livedata_ktx
+    implementation libraries.lifecycle_runtime_ktx
+    implementation libraries.lifecycle_viewmodel_savedstate
+    kapt libraries.lifecycle_compiler_kapt
     testImplementation libraries.koin_test
 
     implementation project(":domain:todo")
