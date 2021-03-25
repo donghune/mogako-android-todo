@@ -40,14 +40,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
         binding.buttonTodoCreate.setOnClickListener {
             AddEditActivity.startActivity(this@MainActivity)
-            viewModel.updateTodoList()
         }
 
-        viewModel.todoList.observe(this, Observer { todoList: List<Todo> ->
+        viewModel.todoList.observe(this) { todoList: List<Todo> ->
             todoAdapter.submitList(todoList)
-        })
-
-        viewModel.updateTodoList()
+        }
 
         setContentView(binding.root)
     }
