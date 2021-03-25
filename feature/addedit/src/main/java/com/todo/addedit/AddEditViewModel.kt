@@ -26,7 +26,7 @@ class AddEditViewModel(
     fun onTodoLoaded(beforeTodo: Todo) {
         _id.value = beforeTodo.id
         content.value = beforeTodo.content
-        date.value = beforeTodo.date
+        date.value = beforeTodo.date.toDate()
         isUseReminder.value = beforeTodo.isUseReminder
         isNewTodo = false
     }

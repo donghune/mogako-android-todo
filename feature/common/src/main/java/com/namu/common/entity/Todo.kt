@@ -2,21 +2,36 @@ package com.namu.common.entity
 
 import android.os.Parcel
 import android.os.Parcelable
-import java.text.SimpleDateFormat
+import org.joda.time.LocalDate
+import org.joda.time.LocalDateTime
 import java.util.*
 
 data class Todo(
     var id: Int,
     var content: String,
-    var date: Date,
+    var date: LocalDateTime,
     var isUseReminder: Boolean,
     var isComplete: Boolean
 ) : Parcelable {
 
+    constructor(
+        id: Int,
+        content: String,
+        date: Date,
+        isUseReminder: Boolean,
+        isComplete: Boolean
+    ) : this(
+        id,
+        content,
+        LocalDateTime.fromDateFields(date),
+        isUseReminder,
+        isComplete
+    )
+
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readString() ?: "",
-        Date(parcel.readLong()),
+        LocalDateTime(parcel.readLong()),
         parcel.readByte() != 0.toByte(),
         parcel.readByte() != 0.toByte()
     )
@@ -24,6 +39,7 @@ data class Todo(
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
         parcel.writeString(content)
+        parcel.writeLong(date.toDate().time)
         parcel.writeByte(if (isUseReminder) 1 else 0)
         parcel.writeByte(if (isComplete) 1 else 0)
     }
@@ -33,21 +49,20 @@ data class Todo(
     }
 
     fun calculateLeftDate(): String {
-        val today = Calendar.getInstance()
-        val todoDate = (today.clone() as Calendar).apply { time = date }
 
-        return when (val dayDiff =
-            todoDate.get(Calendar.DAY_OF_MONTH) - today.get(Calendar.DAY_OF_MONTH)) {
-            0 -> "today"
-            1 -> "tomorrow"
-            else -> {
-                if (dayDiff < 0) {
-                    "overdue"
-                } else {
-                    SimpleDateFormat("yyyy-MM-dd", Locale.KOREA).format(todoDate.time)
-                }
-            }
+        if (date.toLocalDate().isBefore(LocalDate.now())) {
+            return "overdue"
         }
+
+        if (date.toLocalDate().isEqual(LocalDate.now())) {
+            return "today"
+        }
+
+        if (date.toLocalDate().plusDays(-1).isEqual(LocalDate.now())) {
+            return "tomorrow"
+        }
+
+        return date.toLocalDate().toString("yyyy-MM-dd")
     }
 
     companion object CREATOR : Parcelable.Creator<Todo> {
