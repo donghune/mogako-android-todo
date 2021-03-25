@@ -1,17 +1,17 @@
 package com.todo.addedit
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.namu.common.entity.Todo
 import com.namu.common.entity.toTodoEntity
 import com.namu.common.util.BaseViewModel
+import com.namu.common.view.NoneViewState
+import com.namu.common.view.ViewState
 import com.namu.todo.TodoRepository
-import com.namu.todo.entity.TodoEntity
 import java.util.*
 
 class AddEditViewModel(
     private val todoRepository: TodoRepository
-) : BaseViewModel() {
+) : BaseViewModel<ViewState>(NoneViewState) {
 
     private val _id = MutableLiveData<Int>()
 

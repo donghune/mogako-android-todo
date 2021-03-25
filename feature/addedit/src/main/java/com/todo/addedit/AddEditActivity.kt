@@ -3,7 +3,7 @@ package com.todo.addedit
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import androidx.core.widget.doAfterTextChanged
+import android.widget.Toast
 import com.github.florent37.singledateandtimepicker.dialog.SingleDateAndTimePickerDialog
 import com.namu.common.entity.Todo
 import com.namu.common.util.BaseActivity
@@ -32,12 +32,25 @@ class AddEditActivity : BaseActivity<ActivityAddEditBinding, AddEditViewModel>()
             SingleDateAndTimePickerDialog.Builder(this@AddEditActivity)
                 .title("Simple")
                 .defaultDate(viewModel.date.value ?: Date())
-                .listener { it }
+                .listener { viewModel.date.value = it }
                 .display()
         }
 
         binding.buttonClose.setOnClickListener {
             finish()
+        }
+
+        viewModel.viewState.observe(this@AddEditActivity) {
+            when (it) {
+                is AddEditViewState.SaveError -> {
+                    Toast.makeText(this@AddEditActivity, it.message, Toast.LENGTH_SHORT).show()
+                }
+                is AddEditViewState.SaveSuccess -> {
+                    finish()
+                }
+                else -> {
+                }
+            }
         }
 
         setContentView(binding.root)
