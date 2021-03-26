@@ -1,12 +1,15 @@
 package com.todo.addedit
 
 import android.app.Activity
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import com.github.florent37.singledateandtimepicker.dialog.SingleDateAndTimePickerDialog
 import com.namu.common.entity.Todo
 import com.namu.common.util.BaseActivity
+import com.todo.addedit.alarm.AlarmReceiver
 import com.todo.addedit.databinding.ActivityAddEditBinding
 import org.koin.java.KoinJavaComponent.inject
 import java.util.*
@@ -46,6 +49,9 @@ class AddEditActivity : BaseActivity<ActivityAddEditBinding, AddEditViewModel>()
                     Toast.makeText(this@AddEditActivity, it.message, Toast.LENGTH_SHORT).show()
                 }
                 is AddEditViewState.SaveSuccess -> {
+                    if (it.todo.isUseReminder) {
+                        registerAlarm(it.todo)
+                    }
                     finish()
                 }
                 else -> {
@@ -55,6 +61,15 @@ class AddEditActivity : BaseActivity<ActivityAddEditBinding, AddEditViewModel>()
 
         setContentView(binding.root)
 
+    }
+
+    private fun registerAlarm(todo: Todo) {
+        val alarmManager = this@AddEditActivity.getSystemService(ALARM_SERVICE) as AlarmManager
+        alarmManager.set(
+            AlarmManager.RTC_WAKEUP,
+            todo.date.toDate().time + 2000,
+            AlarmReceiver.getPendingIntent(this@AddEditActivity, todo)
+        )
     }
 
     companion object {

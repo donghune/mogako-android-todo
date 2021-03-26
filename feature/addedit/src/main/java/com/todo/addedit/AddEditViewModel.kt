@@ -33,12 +33,12 @@ class AddEditViewModel(
 
     private fun createTodo(todo: Todo) {
         todoRepository.insert(todo.toTodoEntity())
-        updateState(AddEditViewState.SaveSuccess)
+        updateState(AddEditViewState.SaveSuccess(todo))
     }
 
     private fun updateTodo(todo: Todo) {
         todoRepository.update(todo.toTodoEntity())
-        updateState(AddEditViewState.SaveSuccess)
+        updateState(AddEditViewState.SaveSuccess(todo))
     }
 
     fun saveTodo() {
