@@ -56,6 +56,32 @@ fun DependencyHandlerScope.hilt(
     version: String = Ver.hilt
 ) = "com.google.dagger:hilt-$name:$version"
 
+fun DependencyHandlerScope.compose(
+    group: String,
+    name: String,
+    version: String = Ver.compose
+) = androidx("compose.$group", name, version)
+
+fun DependencyHandlerScope.composeUi(
+    name: String,
+    version: String = Ver.compose
+) = compose("ui", name, version)
+
+fun DependencyHandlerScope.composeFoundation(
+    name: String,
+    version: String = Ver.compose
+) = compose("foundation", name, version)
+
+fun DependencyHandlerScope.composeMaterial(
+    name: String,
+    version: String = Ver.compose
+) = compose("material", name, version)
+
+fun DependencyHandlerScope.composeLiveData(
+    name: String = "runtime-livedata",
+    version: String = Ver.compose
+) = compose("runtime", name, version)
+
 fun DependencyHandlerScope.junit(
     version: String = Ver.junit
 ) = "junit:junit:$version"

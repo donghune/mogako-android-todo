@@ -47,10 +47,26 @@ android {
     }
     kotlinOptions {
         jvmTarget = Ver.jvm_target
+        useIR = true
+    }
+    buildFeatures {
+        dataBinding = true
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerVersion = Ver.kotlin
+        kotlinCompilerExtensionVersion = Ver.compose
     }
 }
 
 dependencies {
+    implementation(project(":domain"))
+    implementation(project(":data"))
+    implementation(project(":local"))
+    implementation(project(":remote"))
+    implementation(project(":util"))
+
     implementation(kotlinStdlib())
     implementation(androidCore())
     implementation(androidAppcompat())
@@ -62,6 +78,14 @@ dependencies {
 
     implementation(hilt("android"))
     kapt(hilt("compiler"))
+
+    implementation(composeUi("ui"))
+    implementation(composeUi("ui-tooling"))
+    implementation(composeFoundation("foundation"))
+    implementation(composeMaterial("material"))
+    implementation(composeMaterial("material-icons-core"))
+    implementation(composeMaterial("material-icons-extended"))
+    implementation(composeLiveData())
 
     testImplementation(junit())
     androidTestImplementation(androidJunit())
