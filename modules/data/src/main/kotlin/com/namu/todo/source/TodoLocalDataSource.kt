@@ -3,7 +3,7 @@ package com.namu.todo.source
 import com.namu.todo.domain.entity.Todo
 import com.namu.todo.util.Result
 
-interface TodoDataSource {
+interface TodoLocalDataSource {
     suspend fun insertTodo(todo: Todo): Result<Unit>
 
     suspend fun deleteTodo(todo: Todo): Result<Unit>
