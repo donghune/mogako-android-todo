@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_login">
+
+    <fragment
+        android:id="@+id/navigation_login"
+        android:name="com.namu.todo.LoginFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/activity_splash">
+        <action
+            android:id="@+id/action_to_input"
+            app:destination="@id/navigation_input"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_input"
+        android:name="com.namu.todo.InputFragment"
+        android:label="Input"
+        tools:layout="@layout/fragment_input">
+        <action
+            android:id="@+id/action_navigation_input_self"
+            app:destination="@id/navigation_input" />
+    </fragment>
+
+</navigation>
