@@ -8,7 +8,7 @@ import com.namu.todo.util.buildResult
 import com.namu.todo.util.buildResultCatching
 import javax.inject.Inject
 
-class TodoLocalSource @Inject constructor(
+class TodoLocalDataSourceImpl @Inject constructor(
     private val dao: TodoDao
 ) : TodoLocalDataSource {
     override suspend fun insertTodo(todo: Todo): Result<Unit> = buildResult {

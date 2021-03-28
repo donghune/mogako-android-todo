@@ -2,6 +2,7 @@ package com.namu.todo.local
 
 import android.content.Context
 import androidx.room.Room
+import com.namu.todo.local.room.TodoDao
 import com.namu.todo.local.room.TodoDatabase
 import dagger.Module
 import dagger.Provides
@@ -14,7 +15,10 @@ import dagger.hilt.components.SingletonComponent
 object LocalModule {
 
     @Provides
-    fun getInstance(@ApplicationContext context: Context): TodoDatabase {
+    fun provideDao(appDatabase: TodoDatabase): TodoDao = appDatabase.todoDao()
+
+    @Provides
+    fun provideDatabase(@ApplicationContext context: Context): TodoDatabase {
         return Room.databaseBuilder(
             context,
             TodoDatabase::class.java,

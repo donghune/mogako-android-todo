@@ -4,7 +4,7 @@ object Ver {
     val version_name: String
         get() = "0.0.1"
 
-    const val kotlin = "1.4.21"
+    const val kotlin = "1.4.30"
     const val compile_sdk = 30
     const val build_tools = "30.0.3"
     const val min_sdk = 23

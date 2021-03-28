@@ -18,6 +18,14 @@ android {
             java.srcDir("src/main/kotlin")
         }
     }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = Ver.jvm_target
+    }
 }
 
 dependencies {
