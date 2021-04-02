@@ -15,11 +15,13 @@ object Versions {
     const val mockWebServer = "4.2.1"
     const val truthVersion = "1.0"
 
+    const val concurrent ="1.1.0"
+
     val lifecycle = "2.2.0"
     val recyclerview = "1.2.0-alpha04"
     val recyclerviewSelection = "1.1.0-rc01"
     val glide = "4.9.0"
-    val room = "2.2.3"
+    val room = "2.2.6"
     val paging = "3.0.0-alpha11"
     val pagingJetpack = "1.0.0-alpha04"
     val anko = "0.10.8"

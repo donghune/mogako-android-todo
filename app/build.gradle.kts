@@ -39,6 +39,17 @@ android {
         }
     }
 
+    packagingOptions {
+        exclude("META-INF/AL2.0")
+        exclude("META-INF/LGPL2.1")
+        exclude("META-INF/LICENSE.md")
+        exclude("META-INF/LICENSE-notice.md")
+        exclude("META-INF/metadata.jvm.kotlin_module")
+        exclude("META-INF/gradle/incremental.annotation.processors")
+        exclude("META-INF/metadata.kotlin_module")
+    }
+
+
     buildFeatures {
         dataBinding = true
     }
@@ -49,8 +60,17 @@ android {
 }
 
 dependencies {
-    implementation(project(Modules.base))
-    implementation(project(Modules.presentation))
-    implementation(Libraries.timber)
+    api(project(Modules.presentation))
+    apis(LibraryList.rx)
+    apis(LibraryList.RecyclerViewLibraries)
+    implementationList(LibraryList.appLibraries)
+    apis(LibraryList.NavigationLibraries)
+    apis(LibraryList.Glide)
 
+}
+
+fun org.gradle.api.artifacts.dsl.DependencyHandler.apis(  dependencies:List<String>){
+    dependencies.forEach {
+        api(it)
+    }
 }

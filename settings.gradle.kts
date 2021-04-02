@@ -1,5 +1,3 @@
-include(":base")
-include(":entity")
 include(":domain")
 include(":data")
 include(":presentation")

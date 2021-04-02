@@ -4,8 +4,6 @@ plugins {
 }
 
 dependencies {
-    implementation(project(Modules.base))
-    implementation(project(Modules.data))
-    implementation(Libraries.timber)
+    api(project(Modules.data))
 
 }

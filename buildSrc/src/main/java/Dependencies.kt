@@ -6,8 +6,6 @@ object Modules {
     val data = ":data"
     val domain = ":domain"
     val presentation = ":presentation"
-    val entity = ":entity"
-    val base =":base"
 }
 
 object Libraries {
@@ -69,6 +67,7 @@ object AndroidLibraries {
     val roomKapt = "androidx.room:room-compiler:${Versions.room}"
     val roomKtx = "androidx.room:room-ktx:${Versions.room}"
     val roomGuava = "androidx.room:room-guava:${Versions.room}"
+    val concurrent ="androidx.concurrent:concurrent-futures-ktx:${Versions.concurrent}"
 
 }
 
@@ -91,7 +90,9 @@ object LibraryList {
         add(AndroidLibraries.roomRuntime)
         add(AndroidLibraries.roomKapt)
         add(AndroidLibraries.roomKtx)
-        add(AndroidLibraries.roomGuava)
+        //add(AndroidLibraries.roomGuava)
+       // add(AndroidLibraries.concurrent)
+
     }
 
     val RecyclerViewLibraries = arrayListOf<String>().apply {

@@ -1,6 +1,5 @@
 package base_plugin
 
-
 import AppConfig
 import GradlePluginId
 import LibraryList
@@ -8,6 +7,7 @@ import com.android.build.gradle.BaseExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.api.artifacts.dsl.DependencyHandler
+import org.gradle.kotlin.dsl.apply
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.getByType
 
@@ -72,15 +72,8 @@ internal fun Project.configureBaseDependencies() = dependencies {
         }
     }
 
-    implementation(LibraryList.rx)
-    implementation(LibraryList.HiltLibraries)
-    implementation(LibraryList.RecyclerViewLibraries)
-    implementation(LibraryList.appLibraries)
-    implementation(LibraryList.NavigationLibraries)
-    implementation(LibraryList.Glide)
-    kapt(LibraryList.HiltLibraryKapt)
 
-    //  testImplementation(LibraryList.TestLibrary)
- //   androidTestImplementation(LibraryList.AndroidTestLibrary)
+    implementation(LibraryList.HiltLibraries)
+    kapt(LibraryList.HiltLibraryKapt)
 }
 

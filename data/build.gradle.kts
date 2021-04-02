@@ -4,7 +4,13 @@ plugins {
 }
 
 dependencies {
-    implementationList(LibraryList.RetrofitLibraries)
-    implementation(project(Modules.base))
-    implementation(project(Modules.entity))
+    apis(LibraryList.RetrofitLibraries)
+    apis (LibraryList.roomLibrary)
+    apis(LibraryList.rx)
+
+}
+fun org.gradle.api.artifacts.dsl.DependencyHandler.apis(  dependencies:List<String>){
+    dependencies.forEach {
+        api(it)
+    }
 }
