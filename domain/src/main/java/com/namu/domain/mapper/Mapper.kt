@@ -19,4 +19,17 @@ object Mapper {
                 disLikeCount = item.disLikeCount
         )
     }
+    fun mapTo(item: DomainPostModel): LocalDataPostModel {
+        return LocalDataPostModel(
+                id = item.id,
+                title = item.title,
+                contents = item.contents,
+                regestDate = item.regestDate,
+                modifyDate = item.modifyDate,
+                author = item.author,
+                readCount = item.readCount,
+                likeCount = item.likeCount,
+                disLikeCount = item.disLikeCount
+        )
+    }
 }

@@ -7,6 +7,7 @@ import com.namu.domain.PostWriteUsecase
 import com.nanum.presentation.base.BaseViewModel
 import com.nanum.presentation.base.SingleLiveEvent
 import com.nanum.presentation.base.isNotOrEmpty
+import com.nanum.presentation.mapper.Mapper
 import com.nanum.presentation.model.PresentPostModel
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -40,11 +41,18 @@ class PostWriteViewModelImpl @ViewModelInject constructor(
 
         checkValueNotOrEmptyAndCreateModel().apply {
             this@PostWriteViewModelImpl(
-                    usecase.savePost(this)
+                    Single.just(this)
+                            .map {
+                                Mapper.mapTo(this)
+                            }
+                            .flatMap {
+                                usecase.savePost(it)
+                            }
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribeBy(
                                     onSuccess = {
+                                        setMsgForShow("${it}행 삽입 성공")
 
                                     },
                                     onError = {
@@ -58,7 +66,7 @@ class PostWriteViewModelImpl @ViewModelInject constructor(
 
     }
 
-    override fun checkValueNotOrEmptyAndCreateModel():PresentPostModel {
+    override fun checkValueNotOrEmptyAndCreateModel(): PresentPostModel {
         val title = postLiveDataCollection.title.value
         val contenst = postLiveDataCollection.contents.value
         val registedDate = "test"
@@ -92,7 +100,7 @@ class PostWriteViewModelImpl @ViewModelInject constructor(
 
 interface PostWriteViewModel {
     fun onClickRegistBtn()
-    fun checkValueNotOrEmptyAndCreateModel():PresentPostModel
+    fun checkValueNotOrEmptyAndCreateModel(): PresentPostModel
     fun createPresentPostModel(
             title: String, contents: String,
             registedDate: String, updatedDate: String, author: String,

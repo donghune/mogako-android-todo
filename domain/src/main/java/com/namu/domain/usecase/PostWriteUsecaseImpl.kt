@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 
 interface PostWriteUsecase {
-    fun savePost(item: LocalDataPostModel): Single<Int>
+    fun savePost(item: DomainPostModel): Single<Int>
     fun getPostEach(id: Int): Single<DomainPostModel>
     fun getPostListAll(): Single<List<DomainPostModel>>
 }
@@ -17,8 +17,9 @@ interface PostWriteUsecase {
 class PostWriteUsecaseImpl @Inject constructor(
         private val localRepo: PostLocalRepository
 ) : PostWriteUsecase {
-    override fun savePost(item: LocalDataPostModel): Single<Int> {
+    override fun savePost(item: DomainPostModel): Single<Int> {
         return localRepo.savePost(item)
+
     }
 
 
