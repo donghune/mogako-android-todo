@@ -6,25 +6,29 @@ import androidx.lifecycle.MutableLiveData
 import com.namu.domain.PostWriteUsecase
 import com.nanum.presentation.base.BaseViewModel
 import com.nanum.presentation.base.SingleLiveEvent
+import com.nanum.presentation.base.isNotOrEmpty
+import com.nanum.presentation.model.PresentPostModel
+import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
 
 class PostWriteViewModelImpl @ViewModelInject constructor(
-    private val usecase : PostWriteUsecase
-) : BaseViewModel(),InputTextChaneListener,PostWriteViewModel {
+        private val usecase: PostWriteUsecase
+) : BaseViewModel(), InputTextChaneListener, PostWriteViewModel {
 
     val postLiveDataCollection = PostLiveDataCollection()
 
 
-
-
     override fun onChange(type: ChangeType, data: String) {
-        when(type){
-            ChangeType.POST_WRITE_TITLE->{
+        when (type) {
+            ChangeType.POST_WRITE_TITLE -> {
                 postLiveDataCollection.setTitle(data)
             }
-            ChangeType.POST_WRITE_CONTENTS->{
+            ChangeType.POST_WRITE_CONTENTS -> {
                 postLiveDataCollection.setContents(data)
             }
-            else->{
+            else -> {
 
             }
         }
@@ -32,47 +36,99 @@ class PostWriteViewModelImpl @ViewModelInject constructor(
     }
 
     override fun onClickRegistBtn() {
+
+
+        checkValueNotOrEmptyAndCreateModel().apply {
+            this@PostWriteViewModelImpl(
+                    usecase.savePost(this)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribeBy(
+                                    onSuccess = {
+
+                                    },
+                                    onError = {
+                                        setMsgForShow(it.localizedMessage)
+                                    }
+                            )
+            )
+        }
+
         postLiveDataCollection.setPostRegistResult(true)
+
+    }
+
+    override fun checkValueNotOrEmptyAndCreateModel():PresentPostModel {
+        val title = postLiveDataCollection.title.value
+        val contenst = postLiveDataCollection.contents.value
+        val registedDate = "test"
+        val modifyDated = "test"
+        val author = null
+
+        isNotOrEmpty(title, contenst, registedDate, modifyDated, author)
+        return createPresentPostModel(
+                title!!,
+                contenst!!,
+                registedDate,
+                modifyDated,
+                author!!
+        )
     }
 
 
+    override fun createPresentPostModel(
+            title: String, contents: String,
+            registedDate: String, updatedDate: String, author: String): PresentPostModel {
+        return PresentPostModel(
+                title = title,
+                contents = contents,
+                regestDate = registedDate,
+                modifyDate = updatedDate,
+                author = author
+        )
+    }
 }
 
 
-interface PostWriteViewModel{
+interface PostWriteViewModel {
     fun onClickRegistBtn()
+    fun checkValueNotOrEmptyAndCreateModel():PresentPostModel
+    fun createPresentPostModel(
+            title: String, contents: String,
+            registedDate: String, updatedDate: String, author: String,
+    ): PresentPostModel
 }
 
 
 class PostLiveDataCollection {
     private val _title = MutableLiveData<String>()
-    val title : LiveData<String>
-    get() = _title
+    val title: LiveData<String>
+        get() = _title
 
     private val _contents = MutableLiveData<String>()
-    val contents : LiveData<String>
-    get() = _contents
+    val contents: LiveData<String>
+        get() = _contents
 
 
     private val _postRegistResult = SingleLiveEvent<Boolean>()
-    val postRegistResult : LiveData<Boolean>
+    val postRegistResult: LiveData<Boolean>
         get() = _postRegistResult
 
 
-    fun setTitle(msg:String?){
+    fun setTitle(msg: String?) {
         msg?.let {
-            _title.value=it
+            _title.value = it
         }
     }
 
-    fun setContents(msg:String?){
+    fun setContents(msg: String?) {
         msg?.let {
-            _contents.value=it
+            _contents.value = it
         }
     }
 
-    fun setPostRegistResult(state :Boolean){
-        _postRegistResult.value=state
+    fun setPostRegistResult(state: Boolean) {
+        _postRegistResult.value = state
     }
 
 }

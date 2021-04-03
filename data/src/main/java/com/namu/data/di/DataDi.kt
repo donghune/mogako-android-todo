@@ -2,9 +2,8 @@ package com.namu.data.di
 
 import android.app.Application
 import androidx.room.Room
-import androidx.room.RoomDatabase
 import com.namu.data.AppDataBase
-import com.namu.data.PostDao
+import com.namu.data.dao.PostDao
 import com.namu.data.datasource.PostLocalDataSource
 import com.namu.data.datasource.PostLocalDataSourceImpl
 import dagger.Module
@@ -30,7 +29,7 @@ object DataDi {
 
     @Provides
     @Singleton
-    fun providePostDao(database:AppDataBase):PostDao{
+    fun providePostDao(database:AppDataBase): PostDao {
         return database.getPostDao()
     }
 
