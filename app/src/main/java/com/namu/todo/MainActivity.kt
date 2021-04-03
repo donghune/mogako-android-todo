@@ -22,13 +22,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private val navController: NavController by lazy {
         findNavController(R.id.nav_host_fragment)
     }
-    private val appBarConfiguration: AppBarConfiguration by lazy {
-        AppBarConfiguration(
-            setOf(
-                R.id.navigation_login
-            )
-        )
-    }
+//    private val appBarConfiguration: AppBarConfiguration by lazy {
+//        AppBarConfiguration(
+//            setOf(
+//                R.id.navigation_login
+//            )
+//        )
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +41,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     override fun viewBind() {
+        binding.toolbarVm=toolbarViewModel
         binding.lifecycleOwner = this
     }
 

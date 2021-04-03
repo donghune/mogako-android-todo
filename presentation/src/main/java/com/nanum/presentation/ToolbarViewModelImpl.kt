@@ -11,6 +11,7 @@ interface ToolbarViewModle {
     fun onClickBackBtn()
     fun onClickSetting()
     fun setBackGroundColor(resId: Int)
+    fun getLiveDataCollection(): ToolbarLiveDataCollection
 }
 
 class ToolbarViewModelImpl @ViewModelInject constructor() : BaseViewModel(), ToolbarViewModle {
@@ -18,6 +19,7 @@ class ToolbarViewModelImpl @ViewModelInject constructor() : BaseViewModel(), Too
     val livedatas: ToolbarLiveDataCollection by lazy {
         ToolbarLiveDataCollection()
     }
+
 
     override fun setTitle(data: String?) {
         livedatas.setTitle(data)
@@ -34,10 +36,14 @@ class ToolbarViewModelImpl @ViewModelInject constructor() : BaseViewModel(), Too
     override fun setBackGroundColor(resId: Int) {
         livedatas.setBackGroundColor(resId)
     }
+
+    override fun getLiveDataCollection(): ToolbarLiveDataCollection {
+        return livedatas
+    }
 }
 
 
-class ToolbarLiveDataCollection() : ToolbarViewModle {
+class ToolbarLiveDataCollection() {
     private val _title = MutableLiveData<String>()
     val title: LiveData<String>
         get() = _title
@@ -55,19 +61,20 @@ class ToolbarLiveDataCollection() : ToolbarViewModle {
         get() = _backGroundColor
 
 
-    override fun setTitle(data: String?) {
+    fun setTitle(data: String?) {
         _title.value = data
     }
 
-    override fun onClickBackBtn() {
+    fun onClickBackBtn() {
 
     }
 
-    override fun onClickSetting() {
+    fun onClickSetting() {
         _clickSettingBtn.value = true
     }
 
-    override fun setBackGroundColor(resId: Int) {
+    fun setBackGroundColor(resId: Int) {
         _backGroundColor.value = resId
     }
+
 }
