@@ -3,6 +3,7 @@ package com.namu.todo
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -10,10 +11,13 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.namu.todo.base.BaseActivity
 import com.namu.todo.databinding.ActivityMainBinding
+import com.nanum.presentation.ToolbarViewModelImpl
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
+
+    val toolbarViewModel : ToolbarViewModelImpl by viewModels()
 
     private val navController: NavController by lazy {
         findNavController(R.id.nav_host_fragment)
