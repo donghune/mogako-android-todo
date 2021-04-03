@@ -36,8 +36,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        binding.navView.setupWithNavController(navController)
+        //setupActionBarWithNavController(navController, appBarConfiguration)
+        //binding.navView.setupWithNavController(navController)
     }
 
     override fun viewBind() {
