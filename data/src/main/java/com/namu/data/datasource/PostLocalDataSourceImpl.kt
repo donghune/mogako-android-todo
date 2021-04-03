@@ -6,7 +6,7 @@ import io.reactivex.Single
 import javax.inject.Inject
 
 interface PostLocalDataSource {
-    fun savePost(item: LocalDataPostModel):Single<Int>
+    fun savePost(item: LocalDataPostModel):Single<Long>
     fun getPostEach(id: Int):  Single<LocalDataPostModel>
     fun getPostListAll(): Single<List<LocalDataPostModel>>
 }
@@ -14,7 +14,7 @@ interface PostLocalDataSource {
 class PostLocalDataSourceImpl @Inject constructor(
     private val dao: PostDao
 ) : PostLocalDataSource {
-    override fun savePost(item:LocalDataPostModel):Single<Int> {
+    override fun savePost(item:LocalDataPostModel):Single<Long> {
         return dao.savePost(item)
     }
 

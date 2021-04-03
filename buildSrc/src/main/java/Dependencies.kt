@@ -66,6 +66,7 @@ object AndroidLibraries {
     val roomRuntime = "androidx.room:room-runtime:${Versions.room}"
     val roomKapt = "androidx.room:room-compiler:${Versions.room}"
     val roomKtx = "androidx.room:room-ktx:${Versions.room}"
+    val roomRxJava ="androidx.room:room-rxjava2:${Versions.room}"
     val roomGuava = "androidx.room:room-guava:${Versions.room}"
     val concurrent ="androidx.concurrent:concurrent-futures-ktx:${Versions.concurrent}"
 
@@ -90,6 +91,7 @@ object LibraryList {
         add(AndroidLibraries.roomRuntime)
         add(AndroidLibraries.roomKapt)
         add(AndroidLibraries.roomKtx)
+        add(AndroidLibraries.roomRxJava)
         //add(AndroidLibraries.roomGuava)
        // add(AndroidLibraries.concurrent)
 
@@ -117,6 +119,7 @@ object LibraryList {
     }
 
     val rx = arrayListOf<String>().apply {
+
         add(Libraries.rxKotlin)
         add(Libraries.rxAndroid)
         add(Libraries.rxbinding)

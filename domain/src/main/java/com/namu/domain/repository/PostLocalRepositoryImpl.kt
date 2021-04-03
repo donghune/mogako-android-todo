@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 
 interface PostLocalRepository{
-    fun savePost(item: DomainPostModel):Single<Int>
+    fun savePost(item: DomainPostModel):Single<Long>
     fun getPostEach(id: Int):  Single<LocalDataPostModel>
     fun getPostListAll(): Single<List<LocalDataPostModel>>
 }
@@ -17,7 +17,7 @@ interface PostLocalRepository{
 class PostRepositoryImpl @Inject constructor(
     private val localDataSource : PostLocalDataSource
 ) :PostLocalRepository{
-    override fun savePost(item:DomainPostModel):Single<Int> {
+    override fun savePost(item:DomainPostModel):Single<Long> {
         return Single.just(item)
                 .map {
                     Mapper.mapTo(it)

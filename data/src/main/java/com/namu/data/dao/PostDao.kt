@@ -10,7 +10,7 @@ import io.reactivex.Single
 @Dao
 interface PostDao {
      @Insert(onConflict = OnConflictStrategy.REPLACE)
-     fun savePost(item:LocalDataPostModel): Single<Int>
+     fun savePost(item:LocalDataPostModel): Single<Long>
 
      @Query("SELECT * FROM localdatapostmodel WHERE id =:id")
      fun getPostEach(id: Int):  Single<LocalDataPostModel>
