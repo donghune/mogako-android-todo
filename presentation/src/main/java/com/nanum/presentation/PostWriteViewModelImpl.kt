@@ -9,21 +9,30 @@ import com.nanum.presentation.base.SingleLiveEvent
 
 class PostWriteViewModelImpl @ViewModelInject constructor(
     private val usecase : PostWriteUsecase
-) : BaseViewModel(),PostTwoWayBindingListener,PostWriteViewModel {
+) : BaseViewModel(),InputTextChaneListener,PostWriteViewModel {
 
     val postLiveDataCollection = PostLiveDataCollection()
 
 
-    override fun onTitleInputChange(msg: String) {
-        TODO("Not yet implemented")
-    }
 
-    override fun onContentsInputChange(msg: String) {
-        TODO("Not yet implemented")
+
+    override fun onChange(type: ChangeType, data: String) {
+        when(type){
+            ChangeType.POST_WRITE_TITLE->{
+                postLiveDataCollection.setTitle(data)
+            }
+            ChangeType.POST_WRITE_CONTENTS->{
+                postLiveDataCollection.setContents(data)
+            }
+            else->{
+
+            }
+        }
+
     }
 
     override fun onClickRegistBtn() {
-        TODO("Not yet implemented")
+        postLiveDataCollection.setPostRegistResult(true)
     }
 
 
@@ -32,12 +41,6 @@ class PostWriteViewModelImpl @ViewModelInject constructor(
 
 interface PostWriteViewModel{
     fun onClickRegistBtn()
-}
-
-
-interface PostTwoWayBindingListener{
-    fun onTitleInputChange(msg : String)
-    fun onContentsInputChange(msg : String)
 }
 
 

@@ -6,4 +6,6 @@
     <string name="title_notifications">Notifications</string>
 
     <string name="msg_post_regist_succes">게시글이 등록되었습니다.</string>
+    <string name="msg_hint_prost_input_title">제목을 입력해주세요</string>
+    <string name="msg_regist_post">글쓰기</string>
 </resources>
