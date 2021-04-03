@@ -1,7 +1,6 @@
 package com.namu.domain
 
-import com.example.entity.local.LocalDataPostModel
-import com.namu.domain.mapper.Mapper
+import com.namu.domain.mapper.mapTo
 import com.namu.domain.model.DomainPostModel
 import com.namu.domain.repository.PostLocalRepository
 import io.reactivex.Single
@@ -26,7 +25,7 @@ class PostWriteUsecaseImpl @Inject constructor(
     override fun getPostEach(id: Int): Single<DomainPostModel> {
         return localRepo.getPostEach(id)
                 .map {
-                    Mapper.mapTo(it)
+                    it.mapTo()
                 }
     }
 
@@ -35,7 +34,7 @@ class PostWriteUsecaseImpl @Inject constructor(
                 .map {
                     ArrayList<DomainPostModel>().apply {
                         it.map {
-                            this.add(Mapper.mapTo(it))
+                            this.add(it.mapTo())
                         }
                     }.also {
                         (this as List<DomainPostModel>)

@@ -2,7 +2,7 @@ package com.namu.domain.repository
 
 import com.example.entity.local.LocalDataPostModel
 import com.namu.data.datasource.PostLocalDataSource
-import com.namu.domain.mapper.Mapper
+import com.namu.domain.mapper.mapTo
 import com.namu.domain.model.DomainPostModel
 import io.reactivex.Single
 import javax.inject.Inject
@@ -20,7 +20,7 @@ class PostRepositoryImpl @Inject constructor(
     override fun savePost(item:DomainPostModel):Single<Long> {
         return Single.just(item)
                 .map {
-                    Mapper.mapTo(it)
+                    it.mapTo()
                 }
                 .flatMap {
                     localDataSource.savePost(it)

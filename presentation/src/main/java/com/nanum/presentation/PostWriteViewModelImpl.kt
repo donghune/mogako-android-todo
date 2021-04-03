@@ -7,7 +7,7 @@ import com.namu.domain.PostWriteUsecase
 import com.nanum.presentation.base.BaseViewModel
 import com.nanum.presentation.base.SingleLiveEvent
 import com.nanum.presentation.base.isNotOrEmpty
-import com.nanum.presentation.mapper.Mapper
+import com.nanum.presentation.mapper.mapTo
 import com.nanum.presentation.model.PresentPostModel
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -15,7 +15,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 
 class PostWriteViewModelImpl @ViewModelInject constructor(
-        private val usecase: PostWriteUsecase
+    private val usecase: PostWriteUsecase
 ) : BaseViewModel(), InputTextChaneListener, PostWriteViewModel {
 
     val postLiveDataCollection = PostLiveDataCollection()
@@ -39,26 +39,27 @@ class PostWriteViewModelImpl @ViewModelInject constructor(
     override fun onClickRegistBtn() {
 
 
-        checkValueNotOrEmptyAndCreateModel().apply {
+        checkValueNotOrEmptyAndCreateModel()?.apply {
             this@PostWriteViewModelImpl(
-                    Single.just(this)
-                            .map {
-                                Mapper.mapTo(this)
-                            }
-                            .flatMap {
-                                usecase.savePost(it)
-                            }
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribeBy(
-                                    onSuccess = {
-                                        setMsgForShow("${it}행 삽입 성공")
+                Single.just(this)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(Schedulers.computation())
+                    .map {
+                        it.mapTo()
+                    }
+                    .flatMap {
+                        usecase.savePost(it)
+                    }
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeBy(
+                        onSuccess = {
+                            setMsgForShow("${it}행 삽입 성공")
 
-                                    },
-                                    onError = {
-                                        setMsgForShow(it.localizedMessage)
-                                    }
-                            )
+                        },
+                        onError = {
+                            setMsgForShow(it.localizedMessage)
+                        }
+                    )
             )
         }
 
@@ -66,33 +67,39 @@ class PostWriteViewModelImpl @ViewModelInject constructor(
 
     }
 
-    override fun checkValueNotOrEmptyAndCreateModel(): PresentPostModel {
+    override fun checkValueNotOrEmptyAndCreateModel(): PresentPostModel? {
         val title = postLiveDataCollection.title.value
         val contenst = postLiveDataCollection.contents.value
         val registedDate = "test"
         val modifyDated = "test"
-        val author = null
+        val author = "익명 사용자"
 
-        isNotOrEmpty(title, contenst, registedDate, modifyDated, author)
-        return createPresentPostModel(
+        try {
+            isNotOrEmpty(title, contenst, registedDate, modifyDated, author)
+            return createPresentPostModel(
                 title!!,
                 contenst!!,
                 registedDate,
                 modifyDated,
                 author!!
-        )
+            )
+        } catch (e: Exception) {
+            setMsgForShow(e.localizedMessage)
+        }
+        return null
     }
 
 
     override fun createPresentPostModel(
-            title: String, contents: String,
-            registedDate: String, updatedDate: String, author: String): PresentPostModel {
+        title: String, contents: String,
+        registedDate: String, updatedDate: String, author: String
+    ): PresentPostModel {
         return PresentPostModel(
-                title = title,
-                contents = contents,
-                regestDate = registedDate,
-                modifyDate = updatedDate,
-                author = author
+            title = title,
+            contents = contents,
+            regestDate = registedDate,
+            modifyDate = updatedDate,
+            author = author
         )
     }
 }
@@ -100,10 +107,10 @@ class PostWriteViewModelImpl @ViewModelInject constructor(
 
 interface PostWriteViewModel {
     fun onClickRegistBtn()
-    fun checkValueNotOrEmptyAndCreateModel(): PresentPostModel
+    fun checkValueNotOrEmptyAndCreateModel(): PresentPostModel?
     fun createPresentPostModel(
-            title: String, contents: String,
-            registedDate: String, updatedDate: String, author: String,
+        title: String, contents: String,
+        registedDate: String, updatedDate: String, author: String,
     ): PresentPostModel
 }
 

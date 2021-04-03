@@ -5,6 +5,8 @@ import com.namu.domain.PostWriteUsecase
 import com.namu.domain.PostWriteUsecaseImpl
 import com.namu.domain.repository.PostLocalRepository
 import com.namu.domain.repository.PostRepositoryImpl
+import com.namu.domain.usecase.PostReadUseCase
+import com.namu.domain.usecase.PostReadUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
@@ -27,5 +29,10 @@ object DomainDi {
     @Reusable
     fun provicePostLocalUsecase(repository: PostLocalRepository): PostWriteUsecase{
         return PostWriteUsecaseImpl(repository)
+    }
+    @Provides
+    @Reusable
+    fun providePostListUsecase(repository: PostLocalRepository):PostReadUseCase{
+        return PostReadUseCaseImpl(repository)
     }
 }

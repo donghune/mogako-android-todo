@@ -3,33 +3,32 @@ package com.namu.domain.mapper
 import com.example.entity.local.LocalDataPostModel
 import com.namu.domain.model.DomainPostModel
 
-object Mapper {
+
+fun LocalDataPostModel.mapTo(): DomainPostModel {
+    return DomainPostModel(
+        id = id,
+        title = title,
+        contents = contents,
+        regestDate = regestDate,
+        modifyDate = modifyDate,
+        author = author,
+        readCount = readCount,
+        likeCount = likeCount,
+        disLikeCount = disLikeCount
+    )
+}
 
 
-    fun mapTo(item: LocalDataPostModel): DomainPostModel {
-        return DomainPostModel(
-                id = item.id,
-                title = item.title,
-                contents = item.contents,
-                regestDate = item.regestDate,
-                modifyDate = item.modifyDate,
-                author = item.author,
-                readCount = item.readCount,
-                likeCount = item.likeCount,
-                disLikeCount = item.disLikeCount
-        )
-    }
-    fun mapTo(item: DomainPostModel): LocalDataPostModel {
-        return LocalDataPostModel(
-                id = item.id,
-                title = item.title,
-                contents = item.contents,
-                regestDate = item.regestDate,
-                modifyDate = item.modifyDate,
-                author = item.author,
-                readCount = item.readCount,
-                likeCount = item.likeCount,
-                disLikeCount = item.disLikeCount
-        )
-    }
+fun DomainPostModel.mapTo(): LocalDataPostModel {
+    return LocalDataPostModel(
+        id = id,
+        title = title,
+        contents = contents,
+        regestDate = regestDate,
+        modifyDate = modifyDate,
+        author = author,
+        readCount = readCount,
+        likeCount = likeCount,
+        disLikeCount = disLikeCount
+    )
 }
