@@ -6,13 +6,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.namu.todo.adapter.PostListAdapter
 import com.namu.todo.base.BaseObserverCollections
-import com.namu.todo.databinding.FragmentPostListBinding
+import com.namu.todo.databinding.FragmentPostReadBinding
 import com.nanum.presentation.model.PresentPostModel
 
 class PostListObserverCollection(
     private val context: Context?,
     private val binding: ViewDataBinding
-) : BaseObserverCollections<FragmentPostListBinding>(context, binding) {
+) : BaseObserverCollections<FragmentPostReadBinding>(context, binding) {
 
     val postListObserver = fun(adapter : PostListAdapter): Observer<List<PresentPostModel>> {
        return Observer<List<PresentPostModel>> {

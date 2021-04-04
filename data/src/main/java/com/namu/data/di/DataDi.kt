@@ -3,9 +3,12 @@ package com.namu.data.di
 import android.app.Application
 import androidx.room.Room
 import com.namu.data.AppDataBase
+import com.namu.data.SharedPreferenceBase
 import com.namu.data.dao.PostDao
 import com.namu.data.datasource.PostLocalDataSource
 import com.namu.data.datasource.PostLocalDataSourceImpl
+import com.namu.data.datasource.SharedDataSource
+import com.namu.data.datasource.SharedDataSourceImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -37,6 +40,17 @@ object DataDi {
     @Singleton
     fun provideDataSource(dao: PostDao):PostLocalDataSource{
         return PostLocalDataSourceImpl(dao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSharedInstance(context: Application):SharedPreferenceBase{
+        return SharedPreferenceBase(context)
+    }
+    @Provides
+    @Singleton
+    fun provideSharedDataSource(preferenceBase: SharedPreferenceBase):SharedDataSource{
+        return SharedDataSourceImpl(preferenceBase)
     }
 
 }

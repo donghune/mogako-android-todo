@@ -9,6 +9,7 @@ interface PostLocalDataSource {
     fun savePost(item: LocalDataPostModel):Single<Long>
     fun getPostEach(id: Int):  Single<LocalDataPostModel>
     fun getPostListAll(): Single<List<LocalDataPostModel>>
+    fun deletePostEach(item:LocalDataPostModel):Single<Int>
 }
 
 class PostLocalDataSourceImpl @Inject constructor(
@@ -24,6 +25,10 @@ class PostLocalDataSourceImpl @Inject constructor(
 
     override fun getPostListAll(): Single<List<LocalDataPostModel>> {
         return dao.getPostListAll()
+    }
+
+    override fun deletePostEach(item: LocalDataPostModel): Single<Int> {
+        return dao.deletePostEach(item)
     }
 
 

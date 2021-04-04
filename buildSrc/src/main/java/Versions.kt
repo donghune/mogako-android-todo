@@ -12,10 +12,8 @@ object Versions {
     val retrofitGson = "2.4.0"
     val gson = "2.8.5"
     val okHttp = "3.12.1"
-    const val mockWebServer = "4.2.1"
-    const val truthVersion = "1.0"
-
     const val concurrent ="1.1.0"
+    const val jodaTime ="2.10.10"
 
     val lifecycle = "2.2.0"
     val recyclerview = "1.2.0-alpha04"
@@ -24,18 +22,11 @@ object Versions {
     val room = "2.2.6"
     val paging = "3.0.0-alpha11"
     val pagingJetpack = "1.0.0-alpha04"
-    val anko = "0.10.8"
-    val jsoup = "1.11.3"
 
-    val naverLogin = "4.2.6"
-    val kakaoLogin = "2.3.0"
-    val facebookLogin = "5.0.0"
-    val googlePlayAuth = "19.0.0"
     val googleCore = "1.7.0"
 
     val navigation = "2.2.2"
 
-    val timber = "4.7.1"
 
     val fragmentVersion = "1.3.0-alpha02"
 

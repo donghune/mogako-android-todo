@@ -67,6 +67,7 @@ dependencies {
     apis(LibraryList.NavigationLibraries)
     apis(LibraryList.Glide)
 
+
 }
 
 fun org.gradle.api.artifacts.dsl.DependencyHandler.apis(  dependencies:List<String>){

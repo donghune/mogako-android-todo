@@ -10,4 +10,9 @@
     <string name="msg_regist_post">글쓰기</string>
 
     <string name="title_post_write_toolbar">포스팅하기</string>
+    <string name="title_post_read_toolbar">포스팅목</string>
+    <string name="text_delete_item_cation">정말로 이 게시글을 삭제하시겠습니까?</string>
+    <string name="text_cancel">취소</string>
+    <string name="text_confirm">확인</string>
+    <string name="text_hint_input_name">닉네임을 입력하세요</string>
 </resources>

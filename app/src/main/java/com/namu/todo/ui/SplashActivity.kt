@@ -1,8 +1,9 @@
-package com.namu.todo
+package com.namu.todo.ui
 
+import com.namu.todo.R
 import com.namu.todo.base.BaseActivity
 import com.namu.todo.databinding.ActivitySplashBinding
-import com.namu.todo.ext.printLog
+import com.namu.todo.ext.makeLog
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
@@ -33,7 +34,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
                         finish()
                     },
                     onError = {
-                        printLog("setTimerSplash",it.localizedMessage)
+                        makeLog("setTimerSplash",it.localizedMessage)
                     }
                 )
         )

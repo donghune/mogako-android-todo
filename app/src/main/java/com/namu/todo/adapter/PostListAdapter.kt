@@ -5,14 +5,20 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.namu.todo.databinding.ItemPostItemBinding
+import com.nanum.presentation.PostListViewModel
+import com.nanum.presentation.PostListViewModelImpl
 import com.nanum.presentation.model.PresentPostModel
+import kotlin.math.abs
 
-class PostListAdapter :ListAdapter<PresentPostModel,PostItemViewHolder>(diffUtil){
+class PostListAdapter
+    (private val viewmodel:PostListViewModelImpl)
+    :ListAdapter<PresentPostModel,PostItemViewHolder>(diffUtil){
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostItemViewHolder {
         return PostItemViewHolder(
-            ItemPostItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+            ItemPostItemBinding.inflate(LayoutInflater.from(parent.context),parent,false),
+            viewmodel
         )
     }
 
@@ -44,10 +50,13 @@ class PostListAdapter :ListAdapter<PresentPostModel,PostItemViewHolder>(diffUtil
 
 
 class PostItemViewHolder(
-    private val binding : ItemPostItemBinding
+    private val binding : ItemPostItemBinding,
+    private val viewmodel : PostListViewModel
 ):BaseViewHolder<ItemPostItemBinding,PresentPostModel>(binding){
     override fun bind(item: PresentPostModel) {
         binding.data=item
+        binding.pos= absoluteAdapterPosition
+        binding.viewmodel=viewmodel
         binding.executePendingBindings()
     }
 

@@ -2,7 +2,9 @@ package com.namu.todo.bindinAdapter
 
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.widget.EditText
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import com.nanum.presentation.ChangeType
 import com.nanum.presentation.InputTextChaneListener

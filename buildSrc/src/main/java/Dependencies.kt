@@ -35,7 +35,8 @@ object Libraries {
     val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
     val glideCompiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
 
-    val timber = "com.jakewharton.timber:timber:${Versions.timber}"
+
+    val jodaTime ="joda-time:joda-time:${Versions.jodaTime}"
 
 }
 

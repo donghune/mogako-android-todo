@@ -10,7 +10,7 @@ data class LocalDataPostModel(
     val id: Int,
     val title: String,
     val contents: String,
-    val regestDate: String,
+    val registDate: String,
     val modifyDate: String,
     val author: String,
     val readCount: Int,

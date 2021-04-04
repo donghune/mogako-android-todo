@@ -12,6 +12,7 @@ interface PostLocalRepository{
     fun savePost(item: DomainPostModel):Single<Long>
     fun getPostEach(id: Int):  Single<LocalDataPostModel>
     fun getPostListAll(): Single<List<LocalDataPostModel>>
+    fun deletePostEach(item : LocalDataPostModel):Single<Int>
 }
 
 class PostRepositoryImpl @Inject constructor(
@@ -35,6 +36,10 @@ class PostRepositoryImpl @Inject constructor(
 
     override fun getPostListAll(): Single<List<LocalDataPostModel>> {
         return localDataSource.getPostListAll()
+    }
+
+    override fun deletePostEach(item: LocalDataPostModel): Single<Int> {
+        return localDataSource.deletePostEach(item)
     }
 
 

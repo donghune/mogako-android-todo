@@ -1,9 +1,6 @@
 package com.namu.data.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.example.entity.local.LocalDataPostModel
 import io.reactivex.Single
 
@@ -17,4 +14,7 @@ interface PostDao {
 
      @Query("SELECT * FROM localdatapostmodel ")
      fun getPostListAll(): Single<List<LocalDataPostModel>>
+
+     @Delete
+     fun deletePostEach(item:LocalDataPostModel):Single<Int>
 }

@@ -6,12 +6,20 @@
         <variable
             name="data"
             type="com.nanum.presentation.model.PresentPostModel" />
+
+        <variable
+            name="viewmodel"
+            type="com.nanum.presentation.PostListViewModel" />
+        <variable
+            name="pos"
+            type="Integer" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:onClick="@{()->viewmodel.onClickShowDialog(pos)}"
         android:background="@color/white"
         android:padding="20dp">
 
@@ -35,6 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@{data.contents}"
+            android:clickable="false"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -48,6 +57,7 @@
             android:id="@+id/text_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:clickable="false"
             android:text="@{data.compareDateRegistedOrModify()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -61,6 +71,8 @@
             android:id="@+id/text_author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:clickable="false"
+            android:text="@{data.author}"
             android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

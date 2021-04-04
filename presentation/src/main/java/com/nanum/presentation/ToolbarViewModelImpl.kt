@@ -66,7 +66,7 @@ class ToolbarLiveDataCollection() {
     }
 
     fun onClickBackBtn() {
-
+        _clickBackBtn.value = true
     }
 
     fun onClickSetting() {

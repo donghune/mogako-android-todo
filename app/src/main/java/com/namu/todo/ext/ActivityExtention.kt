@@ -33,7 +33,7 @@ fun Context.showToast(msg: Any?) {
 }
 
 
-fun Any.printLog(tag: String?, msg: String) {
+fun Any.makeLog(tag: String?, msg: String) {
     if (BuildConfig.DEBUG) {
         Log.e(tag, msg)
     }
