@@ -44,4 +44,5 @@ dependencies {
     implementation(lifecycle("runtime-ktx"))
     implementation(lifecycle("viewmodel-ktx"))
     implementation(lifecycle("livedata-ktx"))
+    implementation(lifecycle("common-java8"))
 }

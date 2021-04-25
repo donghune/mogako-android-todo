@@ -67,6 +67,10 @@ dependencies {
     implementation(androidFragment())
     implementation(coroutines("android"))
 
+    implementation(lifecycle("runtime-ktx"))
+    implementation(lifecycle("livedata-ktx"))
+    implementation(lifecycle("viewmodel-ktx"))
+
     implementation(hilt("android"))
     kapt(hilt("compiler"))
 

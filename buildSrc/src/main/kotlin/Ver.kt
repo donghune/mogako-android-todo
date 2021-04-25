@@ -20,7 +20,7 @@ object Ver {
     const val android_appcompat = "1.1.0"
     const val android_activity = "1.2.0-beta02"
     const val android_fragment = "1.3.0-beta02"
-    const val android_lifecycle = "2.3.0-beta01"
+    const val android_lifecycle = "2.3.0"
     const val android_room = "2.2.6"
     const val compose = "1.0.0-alpha12"
 
