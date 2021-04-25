@@ -1,0 +1,16 @@
+package com.namu.todo.util.android
+
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
+
+private fun <T> LiveData<Event<T>>.observe(owner: LifecycleOwner, observer: Observer<T>) =
+    observe(owner) { event: Event<T> -> event.call { observer.onChanged(it) } }
+
+fun <T> AppCompatActivity.observeEvent(liveData: LiveData<Event<T>>, observer: Observer<T>) =
+    liveData.observe(this, observer)
+
+fun <T> Fragment.observeEvent(liveData: LiveData<Event<T>>, observer: Observer<T>) =
+    liveData.observe(viewLifecycleOwner, observer)

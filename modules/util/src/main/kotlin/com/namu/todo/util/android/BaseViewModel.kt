@@ -1,24 +1,36 @@
 package com.namu.todo.util.android
 
 import androidx.lifecycle.*
+import com.namu.todo.util.arch.ViewLifecycle
+import com.namu.todo.util.logger.Logger
 
 abstract class BaseViewModel<VC : ViewCommand, VS : ViewState>(
     initialState: VS
-) : ViewModel() {
+) : ViewModel(), ViewLifecycle {
 
-    private val _event = MutableLiveData<Event<VC>>()
+    @Suppress("PropertyName")
+    protected inline val TAG: String
+        get() = this::class.java.simpleName
+
+    private val _event: MutableLiveData<Event<VC>> = MutableLiveData<Event<VC>>()
     val event: LiveData<Event<VC>>
         get() = _event
 
-    private val _state = MutableLiveData<VS>(initialState)
+    private val _state: MutableLiveData<VS> = MutableLiveData<VS>(initialState)
     val state: LiveData<VS>
         get() = _state
 
+    override var lifecycleOwner: LifecycleOwner? = null
+
+    fun requireState(): VS = state.value!!
+
     protected fun callEvent(viewCommand: VC) {
+        Logger.d("callEvent, $viewCommand")
         _event.value = Event(viewCommand)
     }
 
     protected fun postEvent(viewCommand: VC) {
+        Logger.d("postEvent, $viewCommand")
         _event.postValue(Event(viewCommand))
     }
 
@@ -34,4 +46,9 @@ abstract class BaseViewModel<VC : ViewCommand, VS : ViewState>(
         state.map(block).distinctUntilChanged()
 
     protected inline fun <R> withState(block: VS.() -> R) = block(requireNotNull(state.value))
+
+    override fun onCleared() {
+        lifecycleOwner = null
+        super.onCleared()
+    }
 }
