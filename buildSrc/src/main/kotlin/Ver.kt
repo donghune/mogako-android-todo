@@ -4,9 +4,9 @@ object Ver {
     val version_name: String
         get() = "0.0.1"
 
-    const val kotlin = "1.4.30"
+    const val kotlin = "1.4.31"
     const val compile_sdk = 30
-    const val build_tools = "30.0.3"
+    const val build_tools = "30.0.2"
     const val min_sdk = 23
     const val target_sdk = 30
     const val jvm_target = "1.8"
@@ -28,7 +28,8 @@ object Ver {
     const val android_junit = "1.1.2"
     const val android_espresso = "3.3.0"
 
-    const val studio = "4.2.0-beta06"
+    const val studio = "4.1.2"
+    const val ktlint = "10.0.0"
 
     const val hilt = "2.33-beta"
 }

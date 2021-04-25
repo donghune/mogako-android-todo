@@ -16,3 +16,6 @@ inline val PluginDependenciesSpec.`kotlin-kapt`: PluginDependencySpec
 
 inline val PluginDependenciesSpec.`hilt-plugin`: PluginDependencySpec
     get() = id("dagger.hilt.android.plugin")
+
+inline val PluginDependenciesSpec.`ktlint-plugin`: PluginDependencySpec
+    get() = id("org.jlleitschuh.gradle.ktlint")

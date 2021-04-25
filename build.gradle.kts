@@ -11,6 +11,10 @@ buildscript {
     }
 }
 
+plugins {
+    `ktlint-plugin` version Ver.ktlint apply false
+}
+
 allprojects {
     repositories {
         google()
