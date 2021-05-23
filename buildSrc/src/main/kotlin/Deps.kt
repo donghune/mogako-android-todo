@@ -33,13 +33,20 @@ fun DependencyHandlerScope.androidActivity(
     version: String = Ver.android_activity
 ) = androidx("activity", "activity-ktx", version)
 
+fun DependencyHandlerScope.androidActivityCompose(
+    version: String = "1.3.0-alpha08"
+) = androidx("activity", "activity-compose", version)
+
 fun DependencyHandlerScope.androidFragment(
     version: String = Ver.android_fragment
 ) = androidx("fragment", "fragment-ktx", version)
 
 fun DependencyHandlerScope.lifecycle(
     name: String,
-    version: String = Ver.android_lifecycle
+    version: String = when (name) {
+        "viewmodel-compose" -> Ver.viewmodel_compose
+        else -> Ver.android_lifecycle
+    }
 ) = androidx("lifecycle", "lifecycle-$name", version)
 
 fun DependencyHandlerScope.room(
